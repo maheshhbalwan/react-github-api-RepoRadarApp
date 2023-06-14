@@ -1,45 +1,32 @@
 import React, { useState, useEffect } from "react";
+import { fetchUserDetails } from "../services/GithubAPI";
 
-const UserDetails = ({ username }) => {
-  const [error, setError] = useState(null); // State variable to store the error message
-  const [userDetails, setUserDetails] = useState(null); // State variable to store user details
+function UserDetails({ username }) {
+  const [userDetails, setUserDetails] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       try {
-        const userResponse = await fetch(
-          `https://api.github.com/users/${username}`
-        );
-        if (userResponse.ok) {
-          const userData = await userResponse.json();
-          setUserDetails(userData);
-        } else {
-          setError("User not found");
-        }
+        const data = await fetchUserDetails(username);
+        setUserDetails(data);
       } catch (error) {
-        console.error("Error fetching user details:", error);
-        setError("Error fetching user details");
+        setError(error.message);
       }
     };
 
-    fetchUserData();
+    fetchData();
   }, [username]);
 
   return (
     <div>
       {error ? (
-        <div>
-          <div
-            className="p-4 mb-4 text-sm font-semibold rounded-lg text-red-50 bg-red-50 dark:bg-gray-800 dark:text-red-400"
-            role="alert"
-          >
-            {error}
-          </div>
-        </div>
+        <div>{error}</div>
       ) : (
         <div>
           {userDetails && (
             <div>
+              <h2>{userDetails.login}</h2>
               <h2>{userDetails.login}</h2>
               <h2>ID: {userDetails.id}</h2>
               <h2>Node ID: {userDetails.node_id}</h2>
@@ -79,6 +66,6 @@ const UserDetails = ({ username }) => {
       )}
     </div>
   );
-};
+}
 
 export default UserDetails;

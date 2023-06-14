@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PublicRepos from "./PublicRepos";
-import UserDetails from "../components/UserDetails";
+import UserRepositories from "./userRepositories";
+import UserDetails from "./userDetails";
 
 function Display() {
   const [inputValue, setInputValue] = useState(""); // State variable to store the input value
@@ -21,13 +21,12 @@ function Display() {
   return (
     <div>
       <h1 className="p-5 text-3xl font-bold text-center">Github Repo Radar</h1>
-      <h1 className="p-5 text-3xl font-bold text-center">Name : {username}</h1>
 
       {/* Form for entering the username */}
       <form onSubmit={handleSubmit} className="flex justify-center">
         <input
           type="text"
-          placeholder="Enter username"
+          placeholder="Enter github username"
           value={inputValue}
           onChange={handleInputChange}
           className="p-2 mr-2 border border-gray-300 rounded"
@@ -43,8 +42,8 @@ function Display() {
         List of Repos Below
       </h1>
 
-      {/* Render the PublicRepos component only if a username is entered */}
-      {username && <PublicRepos username={username} />}
+      {/* Render the UserRepositories component only if a username is entered */}
+      {username && <UserRepositories username={username} />}
 
       {/* Heading for the user details */}
       <h1 className="p-5 text-3xl font-bold text-center">User Details Below</h1>
