@@ -33,11 +33,7 @@ function Display() {
           className="p-2 mr-2 border border-gray-300 rounded"
         />
 
-        <button
-          type="submit"
-          onClick={handleSubmit}
-          className="p-2 text-white bg-blue-500 rounded"
-        >
+        <button type="submit" className="p-2 text-white bg-blue-500 rounded">
           Submit
         </button>
       </form>
