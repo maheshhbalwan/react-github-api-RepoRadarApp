@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import UserRepositories from "./userRepositories";
 import UserDetails from "./userDetails";
+import { Navbar } from "./Navbar";
+import { Footer } from "./Footer";
 
 function Display() {
   const [inputValue, setInputValue] = useState(""); // State variable to store the input value
@@ -19,37 +21,50 @@ function Display() {
   };
 
   return (
-    <div>
-      <h1 className="p-5 text-3xl font-bold text-center">Github Repo Radar</h1>
+    <>
+      <Navbar />{" "}
+      <div className="p-3 border rounded">
+        <p className="text-justify text-gray-600 ">
+          The "Github Repo Radar" app is a web application that allows users to
+          search for a GitHub username and retrieve information about the user's
+          details and their repositories. It provides a convenient way to
+          explore GitHub profiles and browse through the repositories of a
+          specific user.
+        </p>
+        {/* Form for entering the username */}
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center mb-4 md:flex-row md:justify-center"
+        >
+          <input
+            type="text"
+            placeholder="Enter GitHub username"
+            value={inputValue}
+            onChange={handleInputChange}
+            className="p-2 mb-2 mr-2 border border-gray-300 rounded md:mb-0 md:mr-0 md:w-auto"
+          />
 
-      {/* Form for entering the username */}
-      <form onSubmit={handleSubmit} className="flex justify-center">
-        <input
-          type="text"
-          placeholder="Enter github username"
-          value={inputValue}
-          onChange={handleInputChange}
-          className="p-2 mr-2 border border-gray-300 rounded"
-        />
+          <button type="submit" className="p-2 text-white bg-blue-500 rounded">
+            Submit
+          </button>
+        </form>
+      </div>
+      <div className="grid grid-cols-1 gap-4 p-3 mt-5 border rounded md:grid-cols-2">
+        <div>
+          <h2 className="text-2xl font-bold">User Details</h2>
 
-        <button type="submit" className="p-2 text-white bg-blue-500 rounded">
-          Submit
-        </button>
-      </form>
+          {/* Render the UserDetails component only if a username is entered */}
+          {username && <UserDetails username={username} />}
+        </div>
+        <div>
+          <h2 className="text-2xl font-bold">List of Repos</h2>
 
-      {/* Heading for the list of repositories */}
-      <h1 className="p-5 text-3xl font-bold text-center">
-        List of Repos Below
-      </h1>
-
-      {/* Render the UserRepositories component only if a username is entered */}
-      {username && <UserRepositories username={username} />}
-
-      {/* Heading for the user details */}
-      <h1 className="p-5 text-3xl font-bold text-center">User Details Below</h1>
-      {/* Render the UserDetails component only if a username is entered */}
-      {username && <UserDetails username={username} />}
-    </div>
+          {/* Render the UserRepositories component only if a username is entered */}
+          {username && <UserRepositories username={username} />}
+        </div>
+      </div>
+      <Footer />
+    </>
   );
 }
 

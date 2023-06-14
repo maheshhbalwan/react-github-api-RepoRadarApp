@@ -24,17 +24,26 @@ function UserRepositories({ username }) {
   };
 
   return (
-    <div>
+    <div className="mt-5">
       {error ? (
-        <div>{error}</div>
+        <div className="text-red-500">{error}</div>
       ) : (
-        <ul>
-          {repositories.map(({ id, name, html_url }) => (
-            <li key={id}>
-              {name}
+        <ul className="list-disc list-inside">
+          {repositories.map(({ id, name, description, html_url, language }) => (
+            <li
+              key={id}
+              className="flex items-center justify-between p-3 mt-2 border rounded"
+            >
+              <div>
+                <p className="text-lg font-semibold">{name}</p>
+                <p className="text-sm text-gray-500">{description}</p>
+                {language && (
+                  <span className="text-xs text-gray-500">{language}</span>
+                )}
+              </div>
               <button
                 onClick={() => handleView(html_url)}
-                className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+                className="px-4 py-2 ml-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
               >
                 View
               </button>
