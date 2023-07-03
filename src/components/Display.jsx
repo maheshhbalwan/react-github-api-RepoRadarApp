@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import UserRepositories from "./userRepositories";
-import UserDetails from "./userDetails";
+import UserRepositories from "./UserRepositories";
+import UserDetails from "./UserDetails";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 
